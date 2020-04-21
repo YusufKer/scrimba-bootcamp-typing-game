@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import useGame from "./GameLogic/useGame"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(){
+  const {textBoxRef,start,startClock,updateUserText,userText,timeRemaining,wordCount} = useGame()
+
+  return(
+      <div className="App">
+          <h1>How fast do you type</h1>
+          <textarea 
+            ref={textBoxRef}
+            disabled={!start}
+            onChange={ updateUserText }
+            value={userText}
+          />
+          <h4>Time remaining: {timeRemaining}</h4>
+          <button disabled={start} onClick={()=>startClock()}>Start</button>
+          <h1>Word Count: {wordCount}</h1>
+      </div>
+  )
 }
 
-export default App;
+export default App
